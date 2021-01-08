@@ -1,0 +1,202 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{081D644F-321E-4A3A-A479-C9BB576C07E6}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GoVision</RootNamespace>
+    <AssemblyName>GoVision</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>AutoForm.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="halcondotnet, Version=12.0.0.0, Culture=neutral, PublicKeyToken=4973bed59ddbf2b8, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\halcondotnet.dll</HintPath>
+    </Reference>
+    <Reference Include="Jai_FactoryDotNET, Version=3.0.7.29446, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\JAI\SDK\bin\Jai_FactoryDotNET.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Calibration.cs" />
+    <Compile Include="Camera\CameraJai.cs" />
+    <Compile Include="Command.cs" />
+    <Compile Include="Define.cs" />
+    <Compile Include="Form\AutoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\AutoForm.Designer.cs">
+      <DependentUpon>AutoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Camera\CameraBase.cs" />
+    <Compile Include="Camera\CameraGige.cs" />
+    <Compile Include="Form\CommunicationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\CommunicationForm.Designer.cs">
+      <DependentUpon>CommunicationForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\DrawControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\DrawControl.designer.cs">
+      <DependentUpon>DrawControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form\LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form\MainCameraForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\MainCameraForm.Designer.cs">
+      <DependentUpon>MainCameraForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form\SystemConfigForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\SystemConfigForm.Designer.cs">
+      <DependentUpon>SystemConfigForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HDevelopExport.cs" />
+    <Compile Include="MeasureMgr.cs" />
+    <Compile Include="Process\ProcessMainPos.cs" />
+    <Compile Include="Process\ProcessMainMea.cs" />
+    <Compile Include="Process\ProcessSideMea.cs" />
+    <Compile Include="Product\ProductMgr.cs" />
+    <Compile Include="Product\ProductData.cs" />
+    <Compile Include="Product\ProductLog.cs" />
+    <Compile Include="Product\ProductParam.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SingletonTemplate.cs" />
+    <Compile Include="Socket\SocketClient.cs" />
+    <Compile Include="Socket\SocketServer.cs" />
+    <Compile Include="Socket\TcpClientMgr.cs" />
+    <Compile Include="Socket\TcpServerMgr.cs" />
+    <Compile Include="Form\SideCameraForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\SideCameraForm.Designer.cs">
+      <DependentUpon>SideCameraForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\VisionBase.cs" />
+    <Compile Include="Control\VisionControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Control\VisionControl.designer.cs">
+      <DependentUpon>VisionControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\VisionMgr.cs" />
+    <Compile Include="SystemParam.cs" />
+    <EmbeddedResource Include="Form\AutoForm.resx">
+      <DependentUpon>AutoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\CommunicationForm.resx">
+      <DependentUpon>CommunicationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\DrawControl.resx">
+      <DependentUpon>DrawControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\MainCameraForm.resx">
+      <DependentUpon>MainCameraForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\SystemConfigForm.resx">
+      <DependentUpon>SystemConfigForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="Form\SideCameraForm.resx">
+      <DependentUpon>SideCameraForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\VisionControl.resx">
+      <DependentUpon>VisionControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GoCommon\GoCommon.csproj">
+      <Project>{f842f8ea-3a47-424b-a9d8-67c6fe5235ed}</Project>
+      <Name>GoCommon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GoVisonUI\GoVisonUI.csproj">
+      <Project>{6d016400-de98-44f3-9d4f-95eaee6863e2}</Project>
+      <Name>GoVisonUI</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AutoForm.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
