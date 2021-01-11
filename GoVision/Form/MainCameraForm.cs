@@ -278,7 +278,7 @@ namespace GoVision
         {
             ProductMgr.GetInstance().Param.Clear();
             MeasureMgr.GetInstance().DelAll();
-            label41.Text= $@"当前产品-{ProductMgr.GetInstance().ProductName}";
+            label41.Text = $@"当前产品-{ProductMgr.GetInstance().ProductName}";
 
             LoadShapeModel();
             LoadMeasure();
@@ -548,7 +548,7 @@ namespace GoVision
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < 3; i++)
             {
                 DataGridViewRow row = new DataGridViewRow();
                 row.Cells.AddRange(new DataGridViewTextBoxCell(),
@@ -1799,7 +1799,7 @@ namespace GoVision
                 HTuple hv_worldY = new HTuple();
                 HTuple hv_worldX = new HTuple();
 
-                for (int i = 0; i < 6; i++)
+                for (int i = 0; i < 3; i++)
                 {
                     hv_worldX.Append(Convert.ToDouble(dgvCalib.Rows[i].Cells[0].Value));
                     hv_worldY.Append(Convert.ToDouble(dgvCalib.Rows[i].Cells[1].Value));
@@ -1826,28 +1826,28 @@ namespace GoVision
                 Log.Show($"{PlatformCalibData.MmPerPixel.D:F3}毫米每像素");
 
                 //标定旋转中心
-                HTuple pixelRows = new HTuple();
-                HTuple pixelColumns = new HTuple();
+                //HTuple pixelRows = new HTuple();
+                //HTuple pixelColumns = new HTuple();
 
-                int length = hv_pixelRows.Length;
+                //int length = hv_pixelRows.Length;
 
-                for (int i = 3; i < length; i++)
-                {
-                    pixelRows.Append(hv_pixelRows[i]);
-                    pixelColumns.Append(hv_pixelColumns[i]);
-                }
+                //for (int i = 3; i < length; i++)
+                //{
+                //    pixelRows.Append(hv_pixelRows[i]);
+                //    pixelColumns.Append(hv_pixelColumns[i]);
+                //}
 
                 //标定旋转中心
-                HDevelopExport.calib_rotate_center(out ho_ContCircle, pixelRows, pixelColumns,
-                    out PlatformCalibData.CenterRow, out PlatformCalibData.CenterColumn, out hv_radius, out PlatformCalibData.CircleError);
+                //HDevelopExport.calib_rotate_center(out ho_ContCircle, pixelRows, pixelColumns,
+                //    out PlatformCalibData.CenterRow, out PlatformCalibData.CenterColumn, out hv_radius, out PlatformCalibData.CircleError);
 
-                Log.Show($"旋转标定成功，中心点：{PlatformCalibData.CenterRow.D:F3},{PlatformCalibData.CenterColumn.D:F3},最大误差：{PlatformCalibData.CircleError.D:F3}");
+                //Log.Show($"旋转标定成功，中心点：{PlatformCalibData.CenterRow.D:F3},{PlatformCalibData.CenterColumn.D:F3},最大误差：{PlatformCalibData.CircleError.D:F3}");
 
                 //标定的数据保存到Product文件夹下
                 string fileName = $@"{System.Environment.CurrentDirectory}\Product\Calib.ini";
 
-                IniTool.Set(fileName, "calib", "CenterRow", PlatformCalibData.CenterRow.ToString());
-                IniTool.Set(fileName, "calib", "CenterColumn", PlatformCalibData.CenterColumn.ToString());
+                //IniTool.Set(fileName, "calib", "CenterRow", PlatformCalibData.CenterRow.ToString());
+                //IniTool.Set(fileName, "calib", "CenterColumn", PlatformCalibData.CenterColumn.ToString());
                 IniTool.Set(fileName, "calib", "MmPerPixel", PlatformCalibData.MmPerPixel.ToString());
 
                 //写入矩阵
@@ -1977,7 +1977,7 @@ namespace GoVision
 
         private void tetb1_TextChanged(object sender, EventArgs e)
         {
-           
+
         }
 
 

@@ -235,6 +235,7 @@ namespace GoVision
         private void AutoForm_Load(object sender, EventArgs e)
         {
             //btnSystemConfig.Enabled = false;
+            btnSideCamera.Enabled = false;
             RoundButton_Communication.Enabled = false;
             btnImageFile.Enabled = false;
             BtnRun.Enabled = false;
@@ -248,7 +249,7 @@ namespace GoVision
             RoundButton_Login.BaseColor = Color.DarkGray;
 
             tlbVer.Alignment = ToolStripItemAlignment.Right;
-            tlbVer.Text = $"Version 20191116";
+            tlbVer.Text = $"V2.1：{System.IO.File.GetLastWriteTime(this.GetType().Assembly.Location)}";
 
             _autoForm = this;
 

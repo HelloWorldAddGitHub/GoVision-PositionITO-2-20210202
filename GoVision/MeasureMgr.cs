@@ -141,7 +141,7 @@ namespace GoVision
 
             public double CenterColumn;
             public double Radian;
-            public double Width = 40;
+            public double Width = 58;
             public double Height = 40;
 
             public double ImageWidth = 5472;
@@ -157,7 +157,7 @@ namespace GoVision
             public double Threshold = 20;
 
             //测量数量和间距
-            public int PinCount = 10;
+            public int PinCount = 19;
 
             public double PinDistance = 48.54;//pixel
 
@@ -188,9 +188,9 @@ namespace GoVision
             public HObject ContourPosNG;
 
             //测量碳点位置界限，mm
-            public double LimiteDiameterMax = 0.8;
+            public double LimiteDiameterMax = 1;
 
-            public double LimiteDiameterMin = 0.4;
+            public double LimiteDiameterMin = 0.5;
             public double LimiteLeft = 0.1;
             public double LimiteRight = 0.1;
             public double LimiteTopMin = 0.1;

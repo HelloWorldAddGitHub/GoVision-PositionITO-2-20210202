@@ -91,13 +91,20 @@ namespace GoVision
                 }
 
                 //*************相对位置**************
-                HTuple relRow, relColumn;
+                //HTuple relRow, relColumn;
 
-                relRow = PlatformCalibData.MarkRow - row;
-                relColumn = PlatformCalibData.MarkColumn - column;
+                //relRow = PlatformCalibData.MarkRow - row;
+                //relColumn = PlatformCalibData.MarkColumn - column;
 
-                SendData.X = PlatformCalibData.PixelToMm(relColumn);
-                SendData.Y = PlatformCalibData.PixelToMm(relRow);
+                //SendData.X = PlatformCalibData.PixelToMm(relColumn);
+                //SendData.Y = PlatformCalibData.PixelToMm(relRow);
+
+                //用矩阵获得Mark点的世界坐标和模板的世界坐标，求差值
+                HTuple colMark, rowMark, rowTrans, colTrans;
+                HOperatorSet.AffineTransPixel(PlatformCalibData.HomMat2D, PlatformCalibData.MarkColumn, PlatformCalibData.MarkRow, out colMark, out rowMark);
+                HOperatorSet.AffineTransPixel(PlatformCalibData.HomMat2D, column, row, out colTrans, out rowTrans);
+                SendData.X = colMark - colTrans;
+                SendData.Y = rowMark - rowTrans;
 
                 Log.Show($"目标位置：X:{SendData.X:F2},Y:{SendData.Y:F2}");
 

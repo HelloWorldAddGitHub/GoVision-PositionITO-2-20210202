@@ -95,23 +95,37 @@ namespace GoVision
                     relRadian = 0 - angle;
 
                     //旋转特征点
-                    HTuple homMat2D;
-                    HOperatorSet.HomMat2dIdentity(out homMat2D);
-                    HOperatorSet.HomMat2dRotate(homMat2D, relRadian, PlatformCalibData.CenterRow, PlatformCalibData.CenterColumn, out homMat2D);
-                    HOperatorSet.AffineTransPixel(homMat2D, row, column, out rowTrans, out colTrans);
+                    //HTuple homMat2D;
+                    //HOperatorSet.HomMat2dIdentity(out homMat2D);
+                    //HOperatorSet.HomMat2dRotate(homMat2D, relRadian, PlatformCalibData.CenterRow, PlatformCalibData.CenterColumn, out homMat2D);
+                    //HOperatorSet.AffineTransPixel(homMat2D, row, column, out rowTrans, out colTrans);
 
                     //以平台Mark点为基准
-                    relRow = PlatformCalibData.MarkRow - rowTrans;
-                    relColumn = PlatformCalibData.MarkColumn - colTrans;
+                    //relRow = PlatformCalibData.MarkRow - rowTrans;
+                    //relColumn = PlatformCalibData.MarkColumn - colTrans;
+
+                    //没有旋转，直接计算X和Y方向的差值，下面的角度只用于显示
+                    //relRow = PlatformCalibData.MarkRow - row;
+                    //relColumn = PlatformCalibData.MarkColumn - column;
 
                     //弧度转角度
                     HTuple degree;
                     HOperatorSet.TupleDeg(relRadian, out degree);
 
                     //赋值给需要发送的数据
-                    SendData.X = PlatformCalibData.PixelToMm(relColumn);
-                    SendData.Y = PlatformCalibData.PixelToMm(relRow);
-                    SendData.Angle = degree;
+                    //SendData.X = PlatformCalibData.PixelToMm(relColumn);
+                    //SendData.Y = PlatformCalibData.PixelToMm(relRow);
+                    //SendData.Angle = degree;
+
+
+                    //用矩阵获得Mark点的世界坐标和模板的世界坐标，求差值
+                    HTuple colMark, rowMark;
+                    HOperatorSet.AffineTransPixel(PlatformCalibData.HomMat2D, PlatformCalibData.MarkColumn, PlatformCalibData.MarkRow, out colMark, out rowMark);
+                    HOperatorSet.AffineTransPixel(PlatformCalibData.HomMat2D, column, row, out colTrans, out rowTrans);
+                    SendData.X = colMark - colTrans;
+                    SendData.Y = rowMark - rowTrans;
+
+
 
                     ctl.AddToStack(ProductMgr.GetInstance().Param.ModelContours);
                     ctl.AddToStack(ProductMgr.GetInstance().Param.ModelOriginContours);
