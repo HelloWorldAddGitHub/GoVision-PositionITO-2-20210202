@@ -159,7 +159,8 @@ namespace GoVision
             //测量数量和间距
             public int PinCount = 19;
 
-            public double PinDistance = 48.54;//pixel
+            //public double PinDistance = 48.54;//pixel
+            public double PinDistance = 75.82;//pixel
 
             //测量结果数据，mm
             public HTuple DisLeft;
