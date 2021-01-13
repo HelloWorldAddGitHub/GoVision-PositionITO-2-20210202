@@ -112,6 +112,11 @@ namespace GoVision
                 HTuple rowTrans, columnTrans;
                 HOperatorSet.AffineTransPixel(mea.PosHomMat2d, row, column, out rowTrans, out columnTrans);
 
+                HTuple homMat2D;
+                HOperatorSet.HomMat2dIdentity(out homMat2D);
+                HOperatorSet.HomMat2dRotate(homMat2D, radian, row, column, out homMat2D);
+                HOperatorSet.AffineTransPixel(homMat2D, rowTrans, columnTrans, out rowTrans, out columnTrans);
+
                 mea.Gen(rowTrans, columnTrans, radian);
                 mea.MeasurePos(image);
                 mea.Close();
