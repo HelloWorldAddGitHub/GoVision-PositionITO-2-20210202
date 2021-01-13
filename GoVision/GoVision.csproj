@@ -75,6 +75,7 @@
   <ItemGroup>
     <Compile Include="Calibration.cs" />
     <Compile Include="Camera\CameraJai.cs" />
+    <Compile Include="Camera\CameraMVision.cs" />
     <Compile Include="Command.cs" />
     <Compile Include="Define.cs" />
     <Compile Include="Form\AutoForm.cs">
