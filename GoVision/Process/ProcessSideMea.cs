@@ -190,7 +190,7 @@ namespace GoVision
                 SaveParam();
             }
 
-            m_ExposureTime = IniTool.GetInt(fileName, "camera", "exposure", 0);
+            m_ExposureTime = IniTool.GetInt(fileName, "camera", "exposure", 1000);
 
             //if (System.IO.File.Exists($"{m_strDir}MeasureHandle.mea"))
             //{
