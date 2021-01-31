@@ -290,7 +290,7 @@
             // 
             // splitContainer1
             // 
-            this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.splitContainer1.Location = new System.Drawing.Point(0, 374);
             this.splitContainer1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -423,6 +423,7 @@
             // 
             // cmbProcess
             // 
+            this.cmbProcess.ForeColor = System.Drawing.Color.Red;
             this.cmbProcess.FormattingEnabled = true;
             this.cmbProcess.Location = new System.Drawing.Point(52, 19);
             this.cmbProcess.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -434,9 +435,11 @@
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.ForeColor = System.Drawing.Color.Red;
             this.label1.Location = new System.Drawing.Point(6, 22);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 14);
+            this.label1.Size = new System.Drawing.Size(37, 19);
             this.label1.TabIndex = 1;
             this.label1.Text = "流程";
             // 
@@ -563,7 +566,7 @@
             this.tbpCalib.Location = new System.Drawing.Point(4, 26);
             this.tbpCalib.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tbpCalib.Name = "tbpCalib";
-            this.tbpCalib.Size = new System.Drawing.Size(286, 603);
+            this.tbpCalib.Size = new System.Drawing.Size(286, 553);
             this.tbpCalib.TabIndex = 5;
             this.tbpCalib.Text = "标定";
             this.tbpCalib.UseVisualStyleBackColor = true;
@@ -780,7 +783,7 @@
             this.tbpMeasure.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tbpMeasure.Name = "tbpMeasure";
             this.tbpMeasure.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tbpMeasure.Size = new System.Drawing.Size(286, 603);
+            this.tbpMeasure.Size = new System.Drawing.Size(286, 553);
             this.tbpMeasure.TabIndex = 2;
             this.tbpMeasure.Text = "测量";
             this.tbpMeasure.UseVisualStyleBackColor = true;
@@ -1409,10 +1412,10 @@
             this.nudMeasureRoiPhi.Location = new System.Drawing.Point(66, 64);
             this.nudMeasureRoiPhi.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.nudMeasureRoiPhi.Maximum = new decimal(new int[] {
-            180,
+            35999,
             0,
             0,
-            0});
+            131072});
             this.nudMeasureRoiPhi.Minimum = new decimal(new int[] {
             180,
             0,
@@ -1537,7 +1540,7 @@
             this.tbpFindModel.Location = new System.Drawing.Point(4, 26);
             this.tbpFindModel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tbpFindModel.Name = "tbpFindModel";
-            this.tbpFindModel.Size = new System.Drawing.Size(286, 603);
+            this.tbpFindModel.Size = new System.Drawing.Size(286, 553);
             this.tbpFindModel.TabIndex = 4;
             this.tbpFindModel.Text = "查找模板";
             this.tbpFindModel.UseVisualStyleBackColor = true;
@@ -1562,9 +1565,9 @@
             this.groupBox12.Controls.Add(this.ckbAdjustImage);
             this.groupBox12.Controls.Add(this.ckbPerprocess);
             this.groupBox12.Location = new System.Drawing.Point(2, 424);
-            this.groupBox12.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox12.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox12.Name = "groupBox12";
-            this.groupBox12.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox12.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox12.Size = new System.Drawing.Size(279, 114);
             this.groupBox12.TabIndex = 87;
             this.groupBox12.TabStop = false;
@@ -1600,7 +1603,7 @@
             0,
             0});
             this.nudEmphasize.Location = new System.Drawing.Point(95, 47);
-            this.nudEmphasize.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.nudEmphasize.Margin = new System.Windows.Forms.Padding(2);
             this.nudEmphasize.Maximum = new decimal(new int[] {
             201,
             0,
@@ -2119,7 +2122,7 @@
             // 
             // DispPyramidTrackBar
             // 
-            this.DispPyramidTrackBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.DispPyramidTrackBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.DispPyramidTrackBar.AutoSize = false;
             this.DispPyramidTrackBar.Enabled = false;
@@ -2160,7 +2163,7 @@
             // 
             // cmbMetric
             // 
-            this.cmbMetric.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.cmbMetric.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbMetric.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbMetric.Items.AddRange(new object[] {
@@ -2177,7 +2180,7 @@
             // 
             // tcbScaleMax
             // 
-            this.tcbScaleMax.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.tcbScaleMax.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tcbScaleMax.AutoSize = false;
             this.tcbScaleMax.Location = new System.Drawing.Point(131, 205);
@@ -2194,7 +2197,7 @@
             // 
             // tcbScaleMin
             // 
-            this.tcbScaleMin.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.tcbScaleMin.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tcbScaleMin.AutoSize = false;
             this.tcbScaleMin.LargeChange = 1;
@@ -2211,7 +2214,7 @@
             // 
             // tcbAngleExtent
             // 
-            this.tcbAngleExtent.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.tcbAngleExtent.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tcbAngleExtent.AutoSize = false;
             this.tcbAngleExtent.Location = new System.Drawing.Point(131, 151);
@@ -2227,7 +2230,7 @@
             // 
             // tcbAngleStart
             // 
-            this.tcbAngleStart.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.tcbAngleStart.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tcbAngleStart.AutoSize = false;
             this.tcbAngleStart.Location = new System.Drawing.Point(131, 124);
@@ -2244,7 +2247,7 @@
             // 
             // tcbNumLevels
             // 
-            this.tcbNumLevels.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.tcbNumLevels.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tcbNumLevels.AutoSize = false;
             this.tcbNumLevels.Location = new System.Drawing.Point(131, 97);
@@ -2257,7 +2260,7 @@
             // 
             // tcbMinContrast
             // 
-            this.tcbMinContrast.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.tcbMinContrast.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tcbMinContrast.AutoSize = false;
             this.tcbMinContrast.Location = new System.Drawing.Point(162, 283);
@@ -2314,7 +2317,7 @@
             // 
             // cmbOptimization
             // 
-            this.cmbOptimization.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.cmbOptimization.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbOptimization.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbOptimization.Items.AddRange(new object[] {
@@ -2421,7 +2424,7 @@
             // 
             // trackBar_Min_Size
             // 
-            this.trackBar_Min_Size.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.trackBar_Min_Size.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.trackBar_Min_Size.AutoSize = false;
             this.trackBar_Min_Size.Location = new System.Drawing.Point(131, 70);
@@ -2677,7 +2680,7 @@
             // 
             // tcbContrastHigh
             // 
-            this.tcbContrastHigh.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.tcbContrastHigh.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tcbContrastHigh.AutoSize = false;
             this.tcbContrastHigh.Location = new System.Drawing.Point(131, 43);
@@ -2694,7 +2697,7 @@
             // 
             // tcbContrastLow
             // 
-            this.tcbContrastLow.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.tcbContrastLow.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tcbContrastLow.AutoSize = false;
             this.tcbContrastLow.Location = new System.Drawing.Point(131, 16);
@@ -2881,8 +2884,8 @@
             // 
             // tabControl1
             // 
-            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tbpCreateModel);
             this.tabControl1.Controls.Add(this.tbpFindModel);

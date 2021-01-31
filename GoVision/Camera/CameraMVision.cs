@@ -163,7 +163,10 @@ namespace GoVision
                 if (m_hAcqHandle == null)
                     Open();
                 if (m_hAcqHandle != null)
-                    HOperatorSet.SetFramegrabberParam(m_hAcqHandle, strParam, nValue);
+                //HOperatorSet.SetFramegrabberParam(m_hAcqHandle, "ExposureMode", "Timed");
+                //HOperatorSet.SetFramegrabberParam(m_hAcqHandle, "ExposureAuto", "Off");
+                //HOperatorSet.SetFramegrabberParam(m_hAcqHandle, "ExposureTime", (double)nValue);
+                HOperatorSet.SetFramegrabberParam(m_hAcqHandle, strParam, (double)nValue);
             }
             catch (HalconException e)
             {

@@ -126,33 +126,42 @@ namespace GoVision
 
         public void ReceiveData(string data)
         {
-            //TODO 解析指令
-            //string command = string.Empty;
+            try
+            {
 
-            Receive.Parse(data);
+                //TODO 解析指令
+                //string command = string.Empty;
 
-            //string step = string.Empty;
+                Receive.Parse(data);
 
-            //VisionMgr.GetInstance().GetVisionBase(step).Process();
+                //string step = string.Empty;
 
-            //TODO 根据指令运行对应流程
-            //switch (command)
-            //{
-            //    case "T1":
-            //        VisionMgr.GetInstance().GetVisionBase(VisionStepName.ClickCarbon).Process();
-            //        break;
-            //    case "C1":
-            //        VisionMgr.GetInstance().GetVisionBase(VisionStepName.ClickCarbonCalib).Process();
-            //        break;
-            //    case "T2":
-            //        VisionMgr.GetInstance().GetVisionBase(VisionStepName.PickScreen).Process();
-            //        break;
-            //    case "C2":
-            //        VisionMgr.GetInstance().GetVisionBase(VisionStepName.PickScreenCalib).Process();
-            //        break;
-            //    default:
-            //        break;
-            //}
+                //VisionMgr.GetInstance().GetVisionBase(step).Process();
+
+                //TODO 根据指令运行对应流程
+                //switch (command)
+                //{
+                //    case "T1":
+                //        VisionMgr.GetInstance().GetVisionBase(VisionStepName.ClickCarbon).Process();
+                //        break;
+                //    case "C1":
+                //        VisionMgr.GetInstance().GetVisionBase(VisionStepName.ClickCarbonCalib).Process();
+                //        break;
+                //    case "T2":
+                //        VisionMgr.GetInstance().GetVisionBase(VisionStepName.PickScreen).Process();
+                //        break;
+                //    case "C2":
+                //        VisionMgr.GetInstance().GetVisionBase(VisionStepName.PickScreenCalib).Process();
+                //        break;
+                //    default:
+                //        break;
+                //}
+
+            }
+            catch (Exception e)
+            {
+                Log.Show($"{e}");
+            }
         }
 
         public void SwitchWnd(RoundButton btn)

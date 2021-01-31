@@ -53,6 +53,8 @@ namespace GoVision
                 grpProductManage.Text = $@"当前产品-{ProductMgr.GetInstance().ProductName}";
                
             }
+
+            MessageBox.Show($"请重起软件");
         }
 
         private void btnAddProduct_Click(object sender, EventArgs e)

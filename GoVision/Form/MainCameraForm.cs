@@ -757,21 +757,28 @@ namespace GoVision
 
         private void btnProcessImage_Click(object sender, EventArgs e)
         {
-            if (vision == null)
+            try
             {
-                MessageBox.Show("请选择流程");
-                return;
-            }
+                if (vision == null)
+                {
+                    MessageBox.Show("请选择流程");
+                    return;
+                }
 
-            if (vision.imgSrc != null && vision.imgSrc.IsInitialized())
-            {
-                SendData.Clear();
-                vision.ProcessImage(visionControl1);
-                //visionControl1.DisplayResults();
+                if (vision.imgSrc != null && vision.imgSrc.IsInitialized())
+                {
+                    SendData.Clear();
+                    vision.ProcessImage(visionControl1);
+                    //visionControl1.DisplayResults();
+                }
+                else
+                {
+                    ShowLog("没有图像");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                ShowLog("没有图像");
+                Log.Show($"{ex}");
             }
         }
 
@@ -1408,27 +1415,36 @@ namespace GoVision
 
         private void MeasurePos()
         {
-            int index = lstMeasureList.SelectedIndex;
-            if (index >= 0 && vision.imgSrc != null)
+            try
             {
-                var mea = MeasureMgr.GetInstance().MeasureList[index];
-                mea.ClearResult();
 
-                mea.Sigma = (double)nudSigma.Value;
-                mea.Threshold = (double)nudThreshold.Value;
+                int index = lstMeasureList.SelectedIndex;
+                if (index >= 0 && vision.imgSrc != null)
+                {
+                    var mea = MeasureMgr.GetInstance().MeasureList[index];
+                    mea.ClearResult();
 
-                mea.PinCount = (int)nudPinCount.Value;
-                mea.PinDistance = PlatformCalibData.MmToPixel((double)nudPinDistance.Value);
-                mea.LimiteDiameterMax = (double)nudDiameterMax.Value;
-                mea.LimiteDiameterMin = (double)nudDiameterMin.Value;
-                mea.LimiteLeft = (double)nudMaginLeft.Value;
-                mea.LimiteRight = (double)nudMaginRight.Value;
-                mea.LimiteTopMin = (double)nudMaginTop.Value;
-                mea.LimiteTopMax = (double)nudMaginTopMax.Value;
+                    mea.Sigma = (double)nudSigma.Value;
+                    mea.Threshold = (double)nudThreshold.Value;
 
-                mea.MeasurePos(vision.imgSrc);
+                    mea.PinCount = (int)nudPinCount.Value;
+                    mea.PinDistance = PlatformCalibData.MmToPixel((double)nudPinDistance.Value);
+                    mea.LimiteDiameterMax = (double)nudDiameterMax.Value;
+                    mea.LimiteDiameterMin = (double)nudDiameterMin.Value;
+                    mea.LimiteLeft = (double)nudMaginLeft.Value;
+                    mea.LimiteRight = (double)nudMaginRight.Value;
+                    mea.LimiteTopMin = (double)nudMaginTop.Value;
+                    mea.LimiteTopMax = (double)nudMaginTopMax.Value;
 
-                visionControl1.DisplayResults();
+                    mea.MeasurePos(vision.imgSrc);
+
+                    visionControl1.DisplayResults();
+                }
+
+            }
+            catch (Exception e)
+            {
+                Log.Show($"{e}");
             }
         }
 
@@ -1500,7 +1516,7 @@ namespace GoVision
                 int count = (int)nudPinCount.Value;
 
                 mea.Close();
-                mea.Gen(rowCenter, columnCenter, radian.D, width, height, disLine, disPin, count);
+                mea.Gen(rowCenter, columnCenter, radian.D - mea.PosRadianDiff, width, height, disLine, disPin, count);
 
                 MeasurePos();
             }
@@ -1552,63 +1568,74 @@ namespace GoVision
 
         private void btnSaveMeasure_Click(object sender, EventArgs e)
         {
-            if (vision.imgSrc != null && vision.imgSrc.IsInitialized())
+            try
             {
-                //获取图像
-                HObject image = vision.GetSrcImage();
 
-                //查找模板
-                HTuple row, column, radModel;
-                bool result = HDevelopExport.FindModelProcess(image, visionControl1, out row, out column, out radModel);
-
-                //显示轮廓
-                //HDevelopExport.dev_display_shape_matching_results(visionControl1.GetHalconWindow(),
-                //    ProductMgr.GetInstance().Param.ModelID, "blue", row, column, angle, scale, scale, 0);
-
-                if (result && ProductMgr.GetInstance().Param.IsSecondPos)
+                if (vision.imgSrc != null && vision.imgSrc.IsInitialized())
                 {
-                    HTuple transRow, transColumn, transRadian;
-                    result = HDevelopExport.FindPinCenter(vision.imgSrc, row, column, radModel, out transRow, out transColumn, out transRadian);
+                    //获取图像
+                    HObject image = vision.GetSrcImage();
 
-                    if (result)
+                    //查找模板
+                    HTuple row, column, radModel;
+                    bool result = HDevelopExport.FindModelProcess(image, visionControl1, out row, out column, out radModel);
+
+                    //显示轮廓
+                    //HDevelopExport.dev_display_shape_matching_results(visionControl1.GetHalconWindow(),
+                    //    ProductMgr.GetInstance().Param.ModelID, "blue", row, column, angle, scale, scale, 0);
+
+                    if (result && ProductMgr.GetInstance().Param.IsSecondPos)
                     {
-                        row = transRow;
-                        column = transColumn;
-                        radModel = transRadian;
+                        HTuple transRow, transColumn, transRadian;
+                        result = HDevelopExport.FindPinCenter(vision.imgSrc, row, column, radModel, out transRow, out transColumn, out transRadian);
+
+                        if (result)
+                        {
+                            row = transRow;
+                            column = transColumn;
+                            radModel = transRadian;
+                        }
+
+                        //ctl.DisplayResults();
                     }
 
-                    //ctl.DisplayResults();
-                }
-
-                if (row.Length > 0)
-                {
-                    //计算每个测量对象与模板的相对位置关系
-                    foreach (var mea in MeasureMgr.GetInstance().MeasureList)
+                    if (row.Length > 0)
                     {
-                        mea.MeasurePos(image);
+                        //计算每个测量对象与模板的相对位置关系
+                        foreach (var mea in MeasureMgr.GetInstance().MeasureList)
+                        {
+                            mea.MeasurePos(image);
 
-                        HTuple homMat2D;
-                        HOperatorSet.HomMat2dIdentity(out homMat2D);
-                        HOperatorSet.HomMat2dTranslate(homMat2D, mea.CenterRow - row, mea.CenterColumn - column, out homMat2D);
+                            HTuple homMat2D;
+                            HOperatorSet.HomMat2dIdentity(out homMat2D);
+                            HOperatorSet.HomMat2dTranslate(homMat2D, mea.CenterRow - row, mea.CenterColumn - column, out homMat2D);
+                            //HOperatorSet.VectorAngleToRigid(row, column, radModel, mea.CenterRow, mea.CenterColumn, mea.Radian, out homMat2D);
 
-                        mea.PosHomMat2d = homMat2D;
-                        mea.PosRadianDiff = mea.Radian - radModel;
-                        //mea.DisHanldeRow = -ProductMgr.GetInstance().Param.SecondRow;
+                            mea.PosHomMat2d = homMat2D;
+                            mea.ModelRadian = radModel;
+                            mea.PosRadianDiff = mea.Radian - radModel;
+                            //mea.DisHanldeRow = -ProductMgr.GetInstance().Param.SecondRow;
+                        }
+
+                        //保存测量所有数据
+                        MeasureMgr.GetInstance().Save($"{ProductMgr.GetInstance().ProductPath}Measure\\");
+
+                        ShowLog("保存测量数据完成");
                     }
-
-                    //保存测量所有数据
-                    MeasureMgr.GetInstance().Save($"{ProductMgr.GetInstance().ProductPath}Measure\\");
-
-                    ShowLog("保存测量数据完成");
+                    else
+                    {
+                        ShowLog("模板查找失败，无法保存测量数据");
+                    }
                 }
                 else
                 {
-                    ShowLog("模板查找失败，无法保存测量数据");
+                    ShowLog("没有图像");
                 }
+
             }
-            else
+            catch (Exception ex)
             {
-                ShowLog("没有图像");
+                Log.Show($"{ex}");
             }
         }
 
