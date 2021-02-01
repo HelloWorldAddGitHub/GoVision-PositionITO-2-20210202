@@ -542,13 +542,16 @@ namespace GoVision
 
             try
             {
+                HObject ho_ImageEmphasize;
+                HOperatorSet.Emphasize(image, out ho_ImageEmphasize, 7, 7, 1);
+
                 var param = ProductMgr.GetInstance().Param;
 
                 HTuple radStart, radExtent;
                 HOperatorSet.TupleRad(param.FindAngleStart, out radStart);
                 HOperatorSet.TupleRad(param.FindAngleExtent, out radExtent);
 
-                HOperatorSet.FindScaledShapeModel(image, param.ModelID,
+                HOperatorSet.FindScaledShapeModel(ho_ImageEmphasize, param.ModelID,
                     radStart, radExtent,
                     param.FindScaleMin, param.FindScaleMax,
                     param.FindScore, param.FindNumMatches,

@@ -1555,6 +1555,7 @@
             this.ckbSecondPos.TabIndex = 88;
             this.ckbSecondPos.Text = "启用二次定位";
             this.ckbSecondPos.UseVisualStyleBackColor = true;
+            this.ckbSecondPos.Visible = false;
             this.ckbSecondPos.CheckedChanged += new System.EventHandler(this.ckbSecondPos_CheckedChanged);
             // 
             // groupBox12

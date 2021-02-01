@@ -67,6 +67,7 @@ namespace GoVision
                 HDevelopExport.dev_display_shape_matching_results(ctl.GetHalconWindow(),
                     ProductMgr.GetInstance().Param.ModelID, "blue", row, column, angle, scale, scale, 0);
 
+                /*
                 //二次定位
                 if (result && ProductMgr.GetInstance().Param.IsSecondPos)
                 {
@@ -82,6 +83,7 @@ namespace GoVision
 
                     //ctl.DisplayResults();
                 }
+                */
 
                 if (!result)
                 {

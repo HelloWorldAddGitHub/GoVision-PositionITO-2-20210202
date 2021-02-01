@@ -69,6 +69,7 @@ namespace GoVision
                 HDevelopExport.dev_display_shape_matching_results(ctl.GetHalconWindow(),
                     ProductMgr.GetInstance().Param.ModelID, "blue", row, column, angle, scale, scale, 0);
 
+                /*
                 if (result && ProductMgr.GetInstance().Param.IsSecondPos)
                 {
                     HTuple transRow, transColumn, transRadian;
@@ -83,6 +84,7 @@ namespace GoVision
 
                     //ctl.DisplayResults();
                 }
+                */
 
                 if (!result)
                 {

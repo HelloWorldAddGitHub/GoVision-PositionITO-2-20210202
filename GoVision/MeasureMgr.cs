@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Threading.Tasks;
 using HalconDotNet;
 
 namespace GoVision
@@ -103,8 +104,39 @@ namespace GoVision
             }
         }
 
+        /// <summary>
+        /// 提取产品轮廓
+        /// </summary>
+        /// <param name="image">输入图像</param>
+        /// <param name="contour">输出产品轮廓</param>
+        public void ExtractContourXld(HObject image, out HObject contour)
+        {
+            // Local iconic variables 
+            HObject ho_ImageMedian, ho_ImageScaled, ho_Regions, ho_RegionClosing, ho_RegionTrans;
+
+            HOperatorSet.GenEmptyObj(out contour);
+
+            HOperatorSet.ScaleImage(image, out ho_ImageScaled, 4.25, -425);
+            HOperatorSet.MedianImage(ho_ImageScaled, out ho_ImageMedian, "square", 15, "mirrored");
+            HOperatorSet.Threshold(ho_ImageMedian, out ho_Regions, 60, 255);
+            HOperatorSet.ClosingCircle(ho_Regions, out ho_RegionClosing, 19.5);
+            HOperatorSet.ShapeTrans(ho_RegionClosing, out ho_RegionTrans, "convex");
+            HOperatorSet.GenContourRegionXld(ho_RegionTrans, out contour, "border");
+        }
+
+        /// <summary>
+        /// 测量所有碳点
+        /// </summary>
+        /// <param name="image"></param>
+        /// <param name="row"></param>
+        /// <param name="column"></param>
+        /// <param name="radian"></param>
         public void MeasureAll(HObject image, double row, double column, double radian)
         {
+            HObject contour;
+            ExtractContourXld(image, out contour);
+
+
             foreach (var mea in MeasureList)
             {
                 mea.ClearResult();
@@ -118,9 +150,10 @@ namespace GoVision
                 HOperatorSet.AffineTransPixel(homMat2D, rowTrans, columnTrans, out rowTrans, out columnTrans);
 
                 mea.Gen(rowTrans, columnTrans, radian);
-                mea.MeasurePos(image);
+                mea.MeasurePos(image, contour);
                 mea.Close();
             }
+
         }
 
         [Serializable]
@@ -201,6 +234,22 @@ namespace GoVision
             public double LimiteRight = 0.1;
             public double LimiteTopMin = 0.1;
             public double LimiteTopMax = 0.95;
+
+            public void Gen()
+            {
+                //生成水平方向测量矩形
+                HOperatorSet.GenMeasureRectangle2(CenterRow, CenterColumn, Radian, Width / 2, Height / 2,
+                    ImageWidth, ImageHeight, Interpolation, out Handle1);
+
+                //生成垂直方向测量矩形
+                HOperatorSet.GenMeasureRectangle2(CenterRow, CenterColumn, Radian - Math.PI / 2, Width / 2, Height / 2,
+                    ImageWidth, ImageHeight, Interpolation, out Handle2);
+
+                //生成屏幕边缘测量矩形
+                HOperatorSet.GenMeasureRectangle2(CenterRow + DisHanldeRow, CenterColumn /*+ DisHanldeColumn*/, Radian + Math.PI / 2,
+                    /*Math.Abs(DisHanldeRow * 2)*/20, Height / 2, ImageWidth, ImageHeight, Interpolation, out HandleLine);
+
+            }
 
             public void Gen(double row, double column, double radian)
             {
@@ -531,7 +580,7 @@ namespace GoVision
                 }
             }
 
-            public void MeasurePos(HObject image)
+            public void MeasurePos(HObject image, HObject edgeContour)
             {
                 //记录测量数量
                 int meaCount = 0;
@@ -559,8 +608,9 @@ namespace GoVision
                     HOperatorSet.ConcatObj(LineEdge, image, out LineEdge);
                     */
 
-                    HTuple edgeRow1, edgeColumn1, edgeRow2, edgeColumn2;
-                    FindEdge(image, row, column, radian, out edgeRow1, out edgeColumn1, out edgeRow2, out edgeColumn2);
+                    //HTuple edgeRow1, edgeColumn1, edgeRow2, edgeColumn2;
+                    //FindEdge(image, row, column, radian, out edgeRow1, out edgeColumn1, out edgeRow2, out edgeColumn2);
+                    HOperatorSet.ConcatObj(LineEdge, edgeContour, out LineEdge);
 
                     //测量所有碳碳点
                     for (int i = 0; i < PinCount; i++)
@@ -579,8 +629,10 @@ namespace GoVision
                             out edgeRow, out edgeColumn, out contour);
 
                         //测量碳点到玻璃边缘的距离
-                        HTuple disTop;
-                        HOperatorSet.DistancePl(edgeRow, edgeColumn, edgeRow1, edgeColumn1, edgeRow2, edgeColumn2, out disTop);
+                        HTuple disTop, distanceMax;
+                        //HOperatorSet.DistancePl(edgeRow, edgeColumn, edgeRow1, edgeColumn1, edgeRow2, edgeColumn2, out disTop);
+                        HOperatorSet.DistancePc(edgeContour, edgeRow, edgeColumn, out disTop, out distanceMax);
+
 
                         //像素转毫米
                         double maxDiameter = Math.Round((PlatformCalibData.PixelToMm(diameterMax) + MeasureMgr.GetInstance().OffsetDia), 2);
@@ -644,6 +696,33 @@ namespace GoVision
                 edgeRow2 = 0;
                 edgeColumn2 = 0;
 
+                /*
+                // Local iconic variables 
+
+                //HObject ho_Image, ho_ImageEmphasize, ho_ROI_0;
+                //HObject ho_ImageReduced, ho_ImageScaled, ho_Regions, ho_Connection;
+                //HObject ho_RegionOpening, ho_RegionClosing, ho_ObjectSelected;
+                //HObject ho_RegionTrans, ho_ImageMean, ho_ImageResult;
+
+                // Local control variables 
+
+                HTuple hv_Area = null, hv_Row = null, hv_Column = null;
+                HTuple hv_Indices = null, hv_Inverted = null;
+
+                HOperatorSet.ScaleImage(image, out ho_ImageScaled, 4.25, -425);
+                HOperatorSet.Threshold(ho_ImageScaled, out ho_Regions, 100, 255);
+                HOperatorSet.OpeningCircle(ho_Regions, out ho_RegionOpening, 3.5);
+                HOperatorSet.ClosingCircle(ho_RegionOpening, out ho_RegionClosing, 19.5);
+                HOperatorSet.Connection(ho_RegionClosing, out ho_Connection);
+                HOperatorSet.AreaCenter(ho_Connection, out hv_Area, out hv_Row, out hv_Column);
+                HOperatorSet.TupleSortIndex(hv_Area, out hv_Indices);
+                HOperatorSet.TupleInverse(hv_Indices, out hv_Inverted);
+                HOperatorSet.SelectObj(ho_Connection, out ho_ObjectSelected, (hv_Inverted.TupleSelect(0)) + 1);
+                HOperatorSet.ShapeTrans(ho_ObjectSelected, out ho_RegionTrans, "rectangle2");
+                HOperatorSet.MeanImage(ho_ImageScaled, out ho_ImageMean, 15, 15);
+                HOperatorSet.PaintRegion(ho_RegionTrans, ho_ImageMean, out ho_ImageResult, 255, "fill");
+                */
+
                 HOperatorSet.GenMeasureRectangle2(row + DisHanldeRow, column /*+ DisHanldeColumn*/, Radian + Math.PI / 2, 20, 40,
                     ImageWidth, ImageHeight, Interpolation, out HandleLine);
 
@@ -674,6 +753,9 @@ namespace GoVision
 
                         HOperatorSet.MeasurePos(image, HandleLine, Sigma, threshold, "negative", "first",
                             out rowEdge, out columnEdge, out amplitude, out distance);
+
+                        //HOperatorSet.MeasurePos(ho_ImageResult, HandleLine, Sigma, threshold, "positive", "first",
+                        //    out rowEdge, out columnEdge, out amplitude, out distance);
 
                         if (rowEdge.Length > 0)
                         {
