@@ -198,23 +198,23 @@ namespace GoVision
 
                 string res = result ? "OK" : "NG";
                 string pathSource = $@"{ProductMgr.GetInstance().ProductPath}Images\{DateTime.Now:yyyyMMdd}\Robot\{res}\Source\";
-                string pathWindow = $@"{ProductMgr.GetInstance().ProductPath}Images\{DateTime.Now:yyyyMMdd}\Robot\{res}\Window\";
+                //string pathWindow = $@"{ProductMgr.GetInstance().ProductPath}Images\{DateTime.Now:yyyyMMdd}\Robot\{res}\Window\";
 
                 if (!System.IO.Directory.Exists(pathSource))
                 {
                     System.IO.Directory.CreateDirectory(pathSource);
                 }
 
-                if (!System.IO.Directory.Exists(pathWindow))
-                {
-                    System.IO.Directory.CreateDirectory(pathWindow);
-                }
+                //if (!System.IO.Directory.Exists(pathWindow))
+                //{
+                //    System.IO.Directory.CreateDirectory(pathWindow);
+                //}
 
                 string fileNameSource = $"{pathSource}{imageName}";
-                string fileNameWindow = $"{pathWindow}{imageName}";
+                //string fileNameWindow = $"{pathWindow}{imageName}";
 
                 HDevelopExport.WriteImage(imgSrc, fileNameSource);
-                HDevelopExport.DumpWindow(handle, fileNameWindow);
+                //HDevelopExport.DumpWindow(handle, fileNameWindow);
                 //});
             }
             catch (Exception)
